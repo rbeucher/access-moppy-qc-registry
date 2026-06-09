@@ -1,0 +1,145 @@
+name: "Propose a new QC check"
+description: >
+  Suggest a brand-new check that does not yet exist in the catalogue.
+  Once accepted, a maintainer will add the YAML entry and implement the
+  corresponding Python class in ACCESS-MOPPy.
+title: "[check] <short name>"
+labels:
+  - "type/new-check"
+  - "status/proposed"
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Propose a new QC check
+        Fill in all required fields. The more detail you provide, the faster
+        the review will be. Required fields are marked *.
+
+  - type: input
+    id: check_id
+    attributes:
+      label: "Proposed check id *"
+      description: >
+        Dot-separated identifier following the pattern `category.snake_case_name`,
+        e.g. `temporal.time_monotonicity`. Must be unique in the catalogue.
+      placeholder: "category.check_name"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category *"
+      description: Which check family does this belong to?
+      options:
+        - temporal
+        - metadata
+        - spatial
+        - data_integrity
+        - global_stats
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: "Scope *"
+      description: >
+        **global** = meaningful for every variable.
+        **per_variable** = only makes sense wired to a specific variable
+        (e.g. a physically-motivated value range).
+      options:
+        - global
+        - per_variable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Default severity *"
+      description: What outcome level should a failing check produce?
+      options:
+        - fail
+        - warn
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description *"
+      description: >
+        What exactly does the check verify? What does a failure mean physically?
+        Be specific enough that someone can implement it without asking follow-up
+        questions.
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: "Rationale *"
+      description: >
+        Why is this check needed? Link to relevant QC documentation, model
+        failures, or data quality issues that motivated the request.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: realm
+    attributes:
+      label: "Realm (if per_variable)"
+      description: Which model realm does this check primarily apply to?
+      options:
+        - atmos
+        - ocean
+        - seaIce
+        - land
+        - landIce
+        - oceanBgchem
+        - all
+      default: 6
+
+  - type: textarea
+    id: variables
+    attributes:
+      label: "Affected variables (if per_variable)"
+      description: >
+        List the CMOR variable names this check should initially be wired to,
+        one per line. Leave blank if scope is global.
+      placeholder: |
+        tas
+        pr
+        tos
+
+  - type: textarea
+    id: experiments
+    attributes:
+      label: "Affected experiments (if experiment-specific)"
+      description: >
+        List experiment ids if the check should only run for certain experiments.
+        Leave blank for all experiments.
+      placeholder: |
+        piControl
+        historical
+
+  - type: textarea
+    id: implementation_notes
+    attributes:
+      label: "Implementation notes"
+      description: >
+        Any hints for the implementer: algorithm, thresholds, reference data
+        needed, edge cases, etc.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "I have searched existing issues and this check is not already proposed"
+          required: true
+        - label: "The proposed id does not already exist in checks/*.yaml"
+          required: true

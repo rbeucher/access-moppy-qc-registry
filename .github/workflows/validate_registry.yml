@@ -1,0 +1,49 @@
+name: Validate registry
+
+on:
+  pull_request:
+    paths:
+      - "checks/**"
+      - "requirements/**"
+      - "schemas/**"
+      - "scripts/**"
+  push:
+    branches: [main]
+    paths:
+      - "checks/**"
+      - "requirements/**"
+      - "schemas/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+
+      - name: Validate check definitions
+        run: python scripts/validate_schema.py checks/ schemas/check.schema.json
+
+      - name: Validate requirement files
+        run: |
+          python scripts/validate_schema.py requirements/global.yaml schemas/requirement.schema.json
+          python scripts/validate_schema.py requirements/variables/ schemas/requirement.schema.json
+          python scripts/validate_schema.py requirements/experiments/ schemas/requirement.schema.json
+
+      - name: Cross-reference checks in requirements exist in catalogue
+        run: python scripts/validate_schema.py --cross-reference
+
+      - name: Compile registry (dry-run)
+        run: python scripts/compile_registry.py --output /tmp/registry.json
+
+      - name: Upload compiled registry as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: registry-preview
+          path: /tmp/registry.json

@@ -1,0 +1,50 @@
+# Spatial QC Checks
+# Checks on latitude, longitude, and spatial coordinate metadata.
+# Each entry must conform to schemas/check.schema.json
+
+- id: spatial.lat_range
+  name: "Latitude in [-90, 90]"
+  category: spatial
+  scope: global
+  severity: fail
+  status: accepted
+  description: >
+    Latitude coordinate values must lie within [-90, 90] degrees. Values
+    outside this range indicate a grid definition error or a unit problem
+    (e.g. radians not converted to degrees).
+  implemented_in: access_moppy.qc.checks.spatial.LatRangeCheck
+
+- id: spatial.lon_range
+  name: "Longitude in [-180, 360]"
+  category: spatial
+  scope: global
+  severity: fail
+  status: accepted
+  description: >
+    Longitude coordinate values must lie within [-180, 360] degrees.
+    Values outside this range indicate a grid definition error.
+  implemented_in: access_moppy.qc.checks.spatial.LonRangeCheck
+
+- id: spatial.coordinate_bounds
+  name: "Coordinate bounds present and consistent"
+  category: spatial
+  scope: global
+  severity: warn
+  status: accepted
+  description: >
+    lat_bnds and lon_bnds (or equivalent) must be present when the
+    CMOR table requires them, and must be internally consistent
+    (no gaps, no overlaps, bounds enclosing the nominal coordinate value).
+  implemented_in: access_moppy.qc.checks.spatial.CoordinateBoundsCheck
+
+- id: spatial.ocean_land_sea_mask
+  name: "Ocean variable land points are masked"
+  category: spatial
+  scope: per_variable
+  severity: warn
+  status: proposed
+  description: >
+    For ocean variables, grid points classified as land by the ocean model
+    land-sea mask should contain fill values, not real data. Unmasked land
+    points indicate a masking step was skipped during post-processing.
+  proposed_by: "@rbeucher"

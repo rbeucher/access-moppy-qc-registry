@@ -1,0 +1,105 @@
+name: "Request a check for a variable / experiment"
+description: >
+  Ask for an existing check to be applied to a specific variable, or for a
+  specific experiment. Use this when the check already exists in the catalogue
+  but is not yet wired to the variable/experiment you care about.
+title: "[requirement] <variable> — <check_id>"
+labels:
+  - "type/requirement"
+  - "status/proposed"
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Request a variable / experiment requirement
+        This form records that a specific check should be **required** (or
+        **optional**) for a particular variable, optionally scoped to certain
+        experiments.
+
+  - type: input
+    id: check_id
+    attributes:
+      label: "Check id *"
+      description: >
+        The dot-separated check id from the catalogue, e.g.
+        `data_integrity.valid_range`. Check `checks/*.yaml` for the full list.
+      placeholder: "category.check_name"
+    validations:
+      required: true
+
+  - type: textarea
+    id: variables
+    attributes:
+      label: "Variable(s) *"
+      description: >
+        CMOR variable name(s), one per line. Use `*` for all variables.
+      placeholder: |
+        tas
+        pr
+    validations:
+      required: true
+
+  - type: textarea
+    id: experiments
+    attributes:
+      label: "Experiment(s) *"
+      description: >
+        Experiment id(s), one per line. Use `*` for all experiments.
+      placeholder: |
+        historical
+        ssp585
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: "Proposed status *"
+      description: Should the check be blocking (required) or advisory (optional)?
+      options:
+        - required
+        - optional
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: "Rationale *"
+      description: >
+        Why should this check be run for this variable/experiment combination?
+        Cite model failures, data quality incidents, or domain knowledge.
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notes for the YAML entry"
+      description: >
+        Any thresholds, references, or caveats that should appear in the
+        requirements YAML notes field.
+
+  - type: dropdown
+    id: realm
+    attributes:
+      label: "Realm"
+      options:
+        - atmos
+        - ocean
+        - seaIce
+        - land
+        - landIce
+        - oceanBgchem
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "The check id exists in checks/*.yaml (or I have opened a propose_check issue)"
+          required: true
+        - label: "I have verified this requirement is not already in requirements/"
+          required: true

@@ -1,0 +1,62 @@
+# Global requirements — apply to ALL variables and ALL experiments
+# unless overridden in a variables/<var>.yaml or experiments/<exp>.yaml file.
+# Each entry must conform to schemas/requirement.schema.json
+
+# ── Temporal ──────────────────────────────────────────────────────────────
+- check: temporal.time_monotonicity
+  variable: "*"
+  experiment: "*"
+  status: required
+
+- check: temporal.time_duplicates
+  variable: "*"
+  experiment: "*"
+  status: required
+
+- check: temporal.time_bounds_present
+  variable: "*"
+  experiment: "*"
+  status: required
+
+# ── Metadata ──────────────────────────────────────────────────────────────
+- check: metadata.required_global_attributes
+  variable: "*"
+  experiment: "*"
+  status: required
+
+- check: metadata.variable_name
+  variable: "*"
+  experiment: "*"
+  status: required
+
+- check: metadata.units
+  variable: "*"
+  experiment: "*"
+  status: required
+
+- check: metadata.cell_methods
+  variable: "*"
+  experiment: "*"
+  status: required
+
+# ── Spatial ───────────────────────────────────────────────────────────────
+- check: spatial.lat_range
+  variable: "*"
+  experiment: "*"
+  status: required
+
+- check: spatial.lon_range
+  variable: "*"
+  experiment: "*"
+  status: required
+
+- check: spatial.coordinate_bounds
+  variable: "*"
+  experiment: "*"
+  status: required
+
+# ── Data integrity ────────────────────────────────────────────────────────
+- check: data_integrity.fill_value_consistency
+  variable: "*"
+  experiment: "*"
+  status: required

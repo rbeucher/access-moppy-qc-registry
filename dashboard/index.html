@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACCESS-MOPPy QC Registry</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>ACCESS-MOPPy QC Registry</h1>
+      <nav>
+        <button class="nav-btn active" data-view="matrix">Experiment Matrix</button>
+        <button class="nav-btn" data-view="variable">Variable Detail</button>
+        <button class="nav-btn" data-view="check">Check Coverage</button>
+        <button class="nav-btn" data-view="proposals">Open Proposals</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app">
+    <div id="loading">Loading registry…</div>
+  </main>
+
+  <footer>
+    <span id="registry-meta"></span>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/rbeucher/access-moppy-qc-registry" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

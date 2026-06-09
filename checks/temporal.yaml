@@ -1,0 +1,41 @@
+# Temporal QC Checks
+# Checks on the time coordinate and time bounds.
+# Each entry must conform to schemas/check.schema.json
+
+- id: temporal.time_monotonicity
+  name: "Time axis monotonicity"
+  category: temporal
+  scope: global
+  severity: fail
+  status: accepted
+  description: >
+    The time coordinate must be strictly monotonically increasing.
+    Non-monotonic time axes cause silent data corruption in downstream tools
+    such as xarray, CDO, and NCO, and indicate problems in the source files
+    or the CMORisation pipeline.
+  implemented_in: access_moppy.qc.checks.temporal.TimeMonotonicityCheck
+
+- id: temporal.time_duplicates
+  name: "No duplicate time steps"
+  category: temporal
+  scope: global
+  severity: fail
+  status: accepted
+  description: >
+    The time coordinate must not contain duplicate values. Duplicate time
+    steps lead to incorrect aggregations and ambiguous indexing in all
+    downstream analysis tools.
+  implemented_in: access_moppy.qc.checks.temporal.TimeDuplicatesCheck
+
+- id: temporal.time_bounds_present
+  name: "Time bounds present"
+  category: temporal
+  scope: global
+  severity: warn
+  status: accepted
+  description: >
+    A time_bnds variable must be present and internally consistent (lower
+    bound < upper bound for each step; no gaps or overlaps between successive
+    intervals). Required by the CMIP6 data request for all time-averaged
+    fields.
+  implemented_in: access_moppy.qc.checks.temporal.TimeBoundsCheck

@@ -1,0 +1,272 @@
+/* ── Reset & base ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d1117;
+  --surface:   #161b22;
+  --border:    #30363d;
+  --text:      #e6edf3;
+  --text-muted:#8b949e;
+  --accent:    #238636;
+
+  --pass:      #238636;
+  --pass-bg:   #0f2c18;
+  --warn:      #9e6a03;
+  --warn-bg:   #2d1e06;
+  --fail:      #da3633;
+  --fail-bg:   #2c1010;
+  --proposed:  #1f6feb;
+  --proposed-bg:#051d3a;
+  --na:        #30363d;
+  --na-bg:     #161b22;
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+html { font-size: 14px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: #58a6ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+header h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.nav-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: border-color 0.15s, color 0.15s;
+}
+.nav-btn:hover { border-color: #58a6ff; color: var(--text); }
+.nav-btn.active {
+  border-color: var(--accent);
+  color: var(--text);
+  background: #0f2c18;
+}
+
+/* ── Main ──────────────────────────────────────────────────────────────── */
+main {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+#loading { color: var(--text-muted); padding: 2rem 0; }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── Controls bar ───────────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.controls label { font-size: 0.85rem; color: var(--text-muted); }
+.controls select, .controls input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+}
+.controls select:focus, .controls input:focus {
+  outline: 2px solid #1f6feb;
+}
+
+/* ── Status badge ───────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge-required  { background: var(--pass-bg);     color: #3fb950; border: 1px solid var(--pass); }
+.badge-optional  { background: var(--warn-bg);     color: #e3b341; border: 1px solid var(--warn); }
+.badge-proposed  { background: var(--proposed-bg); color: #79c0ff; border: 1px solid var(--proposed); }
+.badge-wont-fix  { background: var(--fail-bg);     color: #f85149; border: 1px solid var(--fail); }
+.badge-na        { background: var(--na-bg);       color: var(--text-muted); border: 1px solid var(--na); }
+.badge-global    { background: #1c2b1c; color: #56d364; border: 1px solid #238636; }
+.badge-accepted  { background: var(--pass-bg);     color: #3fb950; border: 1px solid var(--pass); }
+.badge-deprecated{ background: var(--fail-bg);     color: #f85149; border: 1px solid var(--fail); }
+
+/* ── Section heading ────────────────────────────────────────────────────── */
+.view-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.view-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem; }
+
+/* ── Matrix view ────────────────────────────────────────────────────────── */
+.matrix-legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+.legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.legend-swatch {
+  width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0;
+}
+
+.matrix-scroll { overflow-x: auto; }
+table.matrix {
+  border-collapse: collapse;
+  min-width: 100%;
+  font-size: 0.82rem;
+}
+table.matrix th, table.matrix td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  white-space: nowrap;
+}
+table.matrix thead th {
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+}
+table.matrix tbody th {
+  background: var(--surface);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  font-family: var(--mono);
+  font-weight: 500;
+}
+table.matrix td { text-align: center; }
+
+/* Matrix cell colours */
+.cell-required  { background: var(--pass-bg);     color: #3fb950; }
+.cell-optional  { background: var(--warn-bg);     color: #e3b341; }
+.cell-proposed  { background: var(--proposed-bg); color: #79c0ff; }
+.cell-wont-fix  { background: var(--fail-bg);     color: #f85149; }
+.cell-na,
+.cell-missing   { background: var(--bg);          color: var(--border); }
+.cell-global    { background: #0f2c18;            color: #56d364; }
+
+/* ── Cards / lists ──────────────────────────────────────────────────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+.card .card-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+.card p  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ── Detail tables ──────────────────────────────────────────────────────── */
+table.detail {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+table.detail th, table.detail td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+table.detail thead th { background: var(--surface); font-weight: 600; }
+table.detail tbody tr:nth-child(even) { background: #0d1117; }
+table.detail code {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  background: #21262d;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+}
+
+/* ── Proposals feed ─────────────────────────────────────────────────────── */
+.proposal-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.proposal-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.proposal-item .issue-num {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  padding-top: 0.1rem;
+}
+.proposal-item h4 { font-size: 0.9rem; font-weight: 600; }
+.proposal-item .proposal-labels { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem; }
+.gh-label {
+  display: inline-block;
+  border-radius: 12px;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.proposal-note { color: var(--text-muted); font-size: 0.82rem; margin-top: 0.4rem; }
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .header-inner { gap: 0.75rem; }
+  header h1 { font-size: 0.9rem; }
+  .nav-btn { padding: 0.3rem 0.6rem; font-size: 0.78rem; }
+  main { padding: 1rem; }
+}

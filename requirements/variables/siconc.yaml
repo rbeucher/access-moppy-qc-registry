@@ -1,0 +1,34 @@
+# Requirements for variable: siconc (Sea-Ice Area Fraction)
+# Realm: seaIce  |  Table: SImon  |  Units: %
+# All global requirements in requirements/global.yaml apply in addition to these.
+# Each entry must conform to schemas/requirement.schema.json
+
+- check: data_integrity.valid_range
+  variable: siconc
+  experiment: "*"
+  status: required
+  notes: "Valid range 0–100 % as per CMOR table SImon."
+
+- check: global_stats.non_negative
+  variable: siconc
+  experiment: "*"
+  status: required
+  notes: "Sea-ice concentration cannot be negative."
+
+- check: global_stats.min_max_range
+  variable: siconc
+  experiment: "*"
+  status: required
+
+- check: data_integrity.missing_fraction
+  variable: siconc
+  experiment: "*"
+  status: required
+  notes: "Open-ocean points should be 0 %, not fill values."
+
+- check: spatial.ocean_land_sea_mask
+  variable: siconc
+  experiment: "*"
+  status: proposed
+  issue: 0
+  notes: "Land points should be masked in the sea-ice output."

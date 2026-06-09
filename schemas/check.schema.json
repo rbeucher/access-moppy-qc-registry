@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/rbeucher/access-moppy-qc-registry/schemas/check.schema.json",
+  "title": "QC Check Definition",
+  "type": "object",
+  "required": ["id", "name", "category", "scope", "severity", "status", "description"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z_]+\\.[a-z_]+$",
+      "description": "Dot-separated identifier matching the Python QCCheck.name attribute, e.g. temporal.time_monotonicity"
+    },
+    "name": {
+      "type": "string",
+      "description": "Short human-readable name shown in the dashboard"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["temporal", "metadata", "spatial", "data_integrity", "global_stats"],
+      "description": "Top-level grouping; must match the file it lives in"
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["global", "per_variable"],
+      "description": "global = applies to every variable; per_variable = only meaningful when wired to a variable"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["fail", "warn"],
+      "description": "Default outcome level if the check does not pass"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "accepted", "deprecated"],
+      "description": "Lifecycle state of this check definition"
+    },
+    "description": {
+      "type": "string",
+      "description": "Full explanation of what the check verifies and why"
+    },
+    "proposed_by": {
+      "type": "string",
+      "description": "GitHub handle of the proposer, e.g. @rbeucher"
+    },
+    "issue": {
+      "type": "integer",
+      "description": "GitHub Issue number where this check was proposed/discussed"
+    },
+    "implemented_in": {
+      "type": "string",
+      "description": "Fully qualified Python class name, e.g. access_moppy.qc.checks.temporal.TimeMonotonicityCheck"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

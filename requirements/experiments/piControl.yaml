@@ -1,0 +1,13 @@
+# Experiment-level requirement overrides for: piControl
+# These entries ADD to or OVERRIDE the global requirements for any variable
+# run under the piControl experiment.
+# Each entry must conform to schemas/requirement.schema.json
+
+# Trend check is meaningful for multi-century control runs
+- check: global_stats.temporal_trend
+  variable: "*"
+  experiment: piControl
+  status: optional
+  notes: >
+    Run for all variables in piControl to detect model drift.
+    Flagged as warn only; threshold must be set per variable.

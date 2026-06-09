@@ -1,0 +1,53 @@
+# Metadata QC Checks
+# Checks on NetCDF global attributes and variable-level metadata.
+# Each entry must conform to schemas/check.schema.json
+
+- id: metadata.required_global_attributes
+  name: "Required global attributes present"
+  category: metadata
+  scope: global
+  severity: fail
+  status: accepted
+  description: >
+    All mandatory CMIP6 global attributes must be present in the file's
+    global attribute space. When a vocabulary object is available the
+    required list is sourced from it; otherwise a built-in fallback list
+    (Conventions, activity_id, creation_date, experiment_id, frequency,
+    grid_label, institution_id, mip_era, realm, source_id, table_id,
+    variable_id, variant_label) is used.
+  implemented_in: access_moppy.qc.checks.metadata.RequiredGlobalAttributesCheck
+
+- id: metadata.variable_name
+  name: "Variable name matches CMOR table"
+  category: metadata
+  scope: global
+  severity: fail
+  status: accepted
+  description: >
+    The variable_id global attribute and the name of the data variable in
+    the file must match the expected CMOR name for the table being written.
+  implemented_in: access_moppy.qc.checks.metadata.VariableNameCheck
+
+- id: metadata.units
+  name: "Units match CMOR table"
+  category: metadata
+  scope: global
+  severity: fail
+  status: accepted
+  description: >
+    The units attribute on the primary data variable must match the canonical
+    units specified in the CMOR table. Mismatched units indicate either an
+    incorrect conversion in the CMORisation pipeline or a wrong mapping entry.
+  implemented_in: access_moppy.qc.checks.metadata.UnitsCheck
+
+- id: metadata.cell_methods
+  name: "cell_methods match CMOR table"
+  category: metadata
+  scope: global
+  severity: warn
+  status: accepted
+  description: >
+    The cell_methods attribute on the primary data variable must match the
+    value specified in the CMOR table. Deviations indicate the temporal or
+    spatial averaging may differ from what was requested.
+  implemented_in: access_moppy.qc.checks.metadata.CellMethodsCheck

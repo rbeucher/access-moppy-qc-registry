@@ -1,0 +1,35 @@
+# Requirements for variable: tas (Near-Surface Air Temperature)
+# Realm: atmosphere  |  Table: Amon  |  Units: K
+# All global requirements in requirements/global.yaml apply in addition to these.
+# Each entry must conform to schemas/requirement.schema.json
+
+- check: data_integrity.valid_range
+  variable: tas
+  experiment: "*"
+  status: required
+  notes: "Valid range 150–340 K as per CMOR table Amon."
+
+- check: global_stats.min_max_range
+  variable: tas
+  experiment: "*"
+  status: required
+
+- check: global_stats.global_mean_range
+  variable: tas
+  experiment: "*"
+  status: required
+  notes: "Expected global mean ~288 K for historical; acceptable range 270–310 K."
+
+- check: data_integrity.missing_fraction
+  variable: tas
+  experiment: "*"
+  status: required
+  notes: "Atmosphere variables should have zero missing values over land+ocean."
+
+# piControl-specific: flag large multi-century trend
+- check: global_stats.temporal_trend
+  variable: tas
+  experiment: piControl
+  status: proposed
+  issue: 0
+  notes: "Threshold TBD; needs reference from ACCESS-ESM1.6 spin-up documentation."
