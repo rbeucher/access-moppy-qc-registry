@@ -9,12 +9,17 @@
   severity: fail
   status: accepted
   description: >
-    All mandatory CMIP6 global attributes must be present in the file's
+    All mandatory CMIP7 global attributes must be present in the file's
     global attribute space. When a vocabulary object is available the
-    required list is sourced from it; otherwise a built-in fallback list
-    (Conventions, activity_id, creation_date, experiment_id, frequency,
-    grid_label, institution_id, mip_era, realm, source_id, table_id,
-    variable_id, variant_label) is used.
+    required list is sourced from the controlled vocabulary (CMIP7 list:
+    activity_id, area_label, branded_variable, branding_suffix, Conventions,
+    creation_date, data_specs_version, drs_specs, experiment_id,
+    forcing_index, frequency, grid_label, horizontal_label,
+    initialization_index, institution_id, license_id, mip_era,
+    nominal_resolution, physics_index, product, realization_index, realm,
+    region, source_id, temporal_label, tracking_id, variable_id,
+    variant_label, vertical_label). For CMIP6 output, the vocabulary
+    provides its own required attribute list automatically.
   implemented_in: access_moppy.qc.checks.metadata.RequiredGlobalAttributesCheck
 
 - id: metadata.variable_name
