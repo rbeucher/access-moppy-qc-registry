@@ -1,0 +1,6 @@
+# Systematic cc-plugin-wcrp status by variable.
+# This is a single WCRP-level outcome per variable, independent of experiment.
+# Each entry must conform to schemas/wcrp.schema.json
+
+- variable: "*"
+  status: not_done

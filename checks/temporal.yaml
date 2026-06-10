@@ -4,7 +4,8 @@
 
 - id: temporal.time_monotonicity
   name: "Time axis monotonicity"
-  category: temporal
+  kind: additional
+  categories: [temporal]
   scope: global
   severity: fail
   status: accepted
@@ -17,7 +18,8 @@
 
 - id: temporal.time_duplicates
   name: "No duplicate time steps"
-  category: temporal
+  kind: additional
+  categories: [temporal]
   scope: global
   severity: fail
   status: accepted
@@ -29,7 +31,8 @@
 
 - id: temporal.time_bounds_present
   name: "Time bounds present"
-  category: temporal
+  kind: additional
+  categories: [temporal, data]
   scope: global
   severity: warn
   status: accepted

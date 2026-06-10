@@ -4,7 +4,8 @@
 
 - id: spatial.lat_range
   name: "Latitude in [-90, 90]"
-  category: spatial
+  kind: additional
+  categories: [spatial]
   scope: global
   severity: fail
   status: accepted
@@ -16,7 +17,8 @@
 
 - id: spatial.lon_range
   name: "Longitude in [-180, 360]"
-  category: spatial
+  kind: additional
+  categories: [spatial]
   scope: global
   severity: fail
   status: accepted
@@ -27,7 +29,8 @@
 
 - id: spatial.coordinate_bounds
   name: "Coordinate bounds present and consistent"
-  category: spatial
+  kind: additional
+  categories: [spatial, data]
   scope: global
   severity: warn
   status: accepted
@@ -39,7 +42,8 @@
 
 - id: spatial.ocean_land_sea_mask
   name: "Ocean variable land points are masked"
-  category: spatial
+  kind: additional
+  categories: [spatial]
   scope: per_variable
   severity: warn
   status: proposed

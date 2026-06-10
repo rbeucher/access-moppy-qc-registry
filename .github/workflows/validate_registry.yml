@@ -32,6 +32,7 @@ jobs:
 
       - name: Validate requirement files
         run: |
+          python scripts/validate_schema.py requirements/wcrp.yaml schemas/wcrp.schema.json
           python scripts/validate_schema.py requirements/global.yaml schemas/requirement.schema.json
           python scripts/validate_schema.py requirements/variables/ schemas/requirement.schema.json
           python scripts/validate_schema.py requirements/experiments/ schemas/requirement.schema.json

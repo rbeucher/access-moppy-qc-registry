@@ -2,9 +2,9 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/rbeucher/access-moppy-qc-registry/schemas/requirement.schema.json",
   "title": "QC Requirement",
-  "description": "A (check, variable, experiment) requirement tuple with status",
+  "description": "A layered (check, variable, experiment) assignment tuple with requirement class",
   "type": "object",
-  "required": ["check", "variable", "experiment", "status"],
+  "required": ["check", "variable", "experiment", "requirement_class"],
   "additionalProperties": false,
   "properties": {
     "check": {
@@ -26,10 +26,15 @@
       ],
       "description": "Experiment id(s), or * for all experiments"
     },
-    "status": {
+    "requirement_class": {
       "type": "string",
       "enum": ["required", "optional", "proposed", "wont-fix", "not-applicable"],
-      "description": "required = must pass; optional = run but non-blocking; proposed = under discussion; wont-fix = acknowledged but will not be implemented; not-applicable = explicitly excluded"
+      "description": "Applicability class for the assignment: required = must pass; optional = run but non-blocking; proposed = under discussion; wont-fix = acknowledged but will not be implemented; not-applicable = explicitly excluded"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pass", "fail", "not_done"],
+      "description": "Current execution result for this assignment, when known"
     },
     "issue": {
       "type": "integer",

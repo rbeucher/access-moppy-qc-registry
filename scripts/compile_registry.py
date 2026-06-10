@@ -16,6 +16,7 @@ Output format
 -------------
 {
   "generated_at": "<ISO-8601 UTC timestamp>",
+  "wcrp": [ <wcrp status objects> ],
   "checks": [ <check objects> ],
   "requirements": [ <requirement objects with wildcards left as-is> ],
   "variables": [ <sorted list of all explicit variable names> ],
@@ -90,6 +91,16 @@ def load_checks() -> list[dict]:
             check["_source"] = yaml_file.name
             checks.append(check)
     return checks
+
+
+def load_wcrp_statuses() -> list[dict]:
+    wcrp_file = ROOT / "requirements" / "wcrp.yaml"
+    if not wcrp_file.exists():
+        return []
+    statuses = _load_yaml_file(wcrp_file)
+    for entry in statuses:
+        entry["_source"] = "wcrp.yaml"
+    return statuses
 
 
 def load_requirements() -> list[dict]:
@@ -176,6 +187,7 @@ def build_realm_map(variables_dir: Path) -> dict[str, str]:
 
 
 def compile_registry(output: Path) -> None:
+    wcrp = load_wcrp_statuses()
     checks = load_checks()
     requirements = load_requirements()
     inventory = load_inventory()
@@ -189,6 +201,7 @@ def compile_registry(output: Path) -> None:
 
     registry = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "wcrp": wcrp,
         "checks": checks,
         "requirements": requirements,
         "variables": variables,
@@ -202,7 +215,8 @@ def compile_registry(output: Path) -> None:
         json.dump(registry, fh, indent=2)
 
     print(
-        f"Registry compiled: {len(checks)} checks, {len(requirements)} requirements, "
+        f"Registry compiled: {len(wcrp)} WCRP statuses, {len(checks)} checks, "
+        f"{len(requirements)} requirements, "
         f"{len(variables)} variables, {len(experiments)} experiments → {output}"
     )
 

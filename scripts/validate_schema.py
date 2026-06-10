@@ -4,7 +4,8 @@ validate_schema.py
 ==================
 
 Validates YAML source files against their JSON Schemas and optionally
-cross-references check ids used in requirements against the checks catalogue.
+cross-references check ids used in layered requirements against the checks
+catalogue.
 
 Usage
 -----
@@ -103,7 +104,7 @@ def cross_reference() -> int:
             if cid:
                 known_ids.add(cid)
 
-    # Scan all requirement files
+    # Scan all layered requirement files
     req_root = ROOT / "requirements"
     broken = 0
     req_files: list[Path] = []

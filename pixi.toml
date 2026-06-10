@@ -1,0 +1,18 @@
+[workspace]
+name = "access-moppy-qc-registry"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+
+[dependencies]
+python = "3.11.*"
+pyyaml = ">=6.0"
+jsonschema = ">=4.0"
+
+[tasks]
+validate-checks = "python scripts/validate_schema.py checks/ schemas/check.schema.json"
+validate-wcrp = "python scripts/validate_schema.py requirements/wcrp.yaml schemas/wcrp.schema.json"
+validate-layered = "python scripts/validate_schema.py requirements/global.yaml schemas/requirement.schema.json && python scripts/validate_schema.py requirements/variables/ schemas/requirement.schema.json && python scripts/validate_schema.py requirements/experiments/ schemas/requirement.schema.json"
+validate-crossref = "python scripts/validate_schema.py --cross-reference"
+validate = { depends-on = ["validate-checks", "validate-wcrp", "validate-layered", "validate-crossref"] }
+compile-registry = "python scripts/compile_registry.py --output dashboard/registry.json"
+serve-dashboard = "cd dashboard && python -m http.server 8080"

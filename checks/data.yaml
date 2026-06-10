@@ -1,0 +1,32 @@
+# Data QC Checks
+# Data-oriented checks on field-wide values and simple physical plausibility.
+# Each entry must conform to schemas/check.schema.json
+
+- id: global_stats.min_max_range
+  name: "Global min/max within plausible range"
+  kind: additional
+  categories: [data]
+  scope: per_variable
+  severity: warn
+  status: accepted
+  description: >
+    The global minimum and maximum of the data field must fall within a
+    plausible physical range for this variable. The range is sourced from
+    the vocabulary object when available; otherwise a hard-coded fallback
+    is used. This is a coarser sanity check than strict value-range validation
+    and is intended to catch catastrophic unit or scaling errors.
+  implemented_in: access_moppy.qc.checks.global_stats.MinMaxRangeCheck
+
+- id: global_stats.non_negative
+  name: "Non-negative variable has no negative values"
+  kind: additional
+  categories: [data]
+  scope: per_variable
+  severity: fail
+  status: accepted
+  description: >
+    Variables that are physically non-negative (e.g. precipitation, sea-ice
+    concentration, cloud fraction) must not contain negative values.
+    Negative values indicate a unit conversion error or a numerical artefact
+    from the interpolation or regridding step.
+  implemented_in: access_moppy.qc.checks.global_stats.NonNegativeCheck

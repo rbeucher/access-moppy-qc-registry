@@ -3,31 +3,13 @@
 # All global requirements in requirements/global.yaml apply in addition to these.
 # Each entry must conform to schemas/requirement.schema.json
 
-- check: data_integrity.valid_range
-  variable: tos
-  experiment: "*"
-  status: required
-  notes: "Valid range -2 to 40 degC as per CMOR table Omon."
-
 - check: global_stats.min_max_range
   variable: tos
   experiment: "*"
-  status: required
-
-- check: global_stats.global_mean_range
-  variable: tos
-  experiment: "*"
-  status: required
-  notes: "Expected global mean ~17 degC for historical."
-
-- check: data_integrity.missing_fraction
-  variable: tos
-  experiment: "*"
-  status: required
-  notes: "Land points should be masked; some missing fraction is expected."
+  requirement_class: required
 
 - check: spatial.ocean_land_sea_mask
   variable: tos
   experiment: "*"
-  status: proposed
+  requirement_class: proposed
   issue: 0

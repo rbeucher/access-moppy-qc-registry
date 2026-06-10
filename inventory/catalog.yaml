@@ -24,263 +24,525 @@ experiments:
 variables:
   - name: 3hr.huss
     short_name: huss
+    cmip7_name: atmos.huss.tpt-h2m-hxy-u.3hr.glb
+    description: 'Near-Surface Specific Humidity'
   - name: 3hr.pr
     short_name: pr
+    cmip7_name: atmos.pr.tavg-u-hxy-u.3hr.glb
+    description: 'Precipitation'
   - name: 3hr.tas
     short_name: tas
+    cmip7_name: atmos.tas.tpt-h2m-hxy-u.3hr.glb
+    description: 'Near-Surface Air Temperature'
   - name: 3hrPt.uas
     short_name: uas
+    cmip7_name: atmos.uas.tpt-h10m-hxy-u.3hr.glb
+    description: 'Eastward Near-Surface Wind'
   - name: 3hrPt.vas
     short_name: vas
+    cmip7_name: atmos.vas.tpt-h10m-hxy-u.3hr.glb
+    description: 'Northward Near-Surface Wind'
   - name: 6hrPlev.hurs
     short_name: hurs
+    cmip7_name: atmos.hurs.tavg-h2m-hxy-u.6hr.glb
+    description: 'Near-Surface Relative Humidity'
   - name: 6hrPlevPt.ta
     short_name: ta
+    cmip7_name: atmos.ta.tpt-p3-hxy-air.6hr.glb
+    description: 'Air Temperature'
   - name: 6hrPlevPt.ua
     short_name: ua
+    cmip7_name: atmos.ua.tpt-p3-hxy-air.6hr.glb
+    description: 'Eastward Wind'
   - name: 6hrPlevPt.va
     short_name: va
+    cmip7_name: atmos.va.tpt-p3-hxy-air.6hr.glb
+    description: 'Northward Wind'
   - name: Amon.cl
     short_name: cl
+    cmip7_name: atmos.cl.tavg-al-hxy-u.mon.glb
+    description: 'Percentage Cloud Cover'
   - name: Amon.cli
     short_name: cli
+    cmip7_name: atmos.cli.tavg-al-hxy-u.mon.glb
+    description: 'Mass Fraction of Cloud Ice'
   - name: Amon.clivi
     short_name: clivi
+    cmip7_name: atmos.clivi.tavg-u-hxy-u.mon.glb
+    description: 'Ice Water Path'
   - name: Amon.clt
     short_name: clt
+    cmip7_name: atmos.clt.tavg-u-hxy-u.mon.glb
+    description: 'Total Cloud Cover Percentage'
   - name: Amon.clw
     short_name: clw
+    cmip7_name: atmos.clw.tavg-al-hxy-u.mon.glb
+    description: 'Mass Fraction of Cloud Liquid Water'
   - name: Amon.clwvi
     short_name: clwvi
+    cmip7_name: atmos.clwvi.tavg-u-hxy-u.mon.glb
+    description: 'Condensed Water Path'
   - name: Amon.evspsbl
     short_name: evspsbl
+    cmip7_name: atmos.evspsbl.tavg-u-hxy-u.mon.glb
+    description: 'Evaporation Including Sublimation and Transpiration'
   - name: Amon.hfls
     short_name: hfls
+    cmip7_name: atmos.hfls.tavg-u-hxy-u.mon.glb
+    description: 'Surface Upward Latent Heat Flux'
   - name: Amon.hfss
     short_name: hfss
+    cmip7_name: atmos.hfss.tavg-u-hxy-u.mon.glb
+    description: 'Surface Upward Sensible Heat Flux'
   - name: Amon.hur
     short_name: hur
+    cmip7_name: atmos.hur.tavg-p19-hxy-air.mon.glb
+    description: 'Relative Humidity'
   - name: Amon.hurs
     short_name: hurs
+    cmip7_name: atmos.hurs.tavg-h2m-hxy-u.mon.glb
+    description: 'Near-Surface Relative Humidity'
   - name: Amon.hus
     short_name: hus
+    cmip7_name: atmos.hus.tavg-p19-hxy-u.mon.glb
+    description: 'Specific Humidity'
   - name: Amon.huss
     short_name: huss
+    cmip7_name: atmos.huss.tavg-h2m-hxy-u.mon.glb
+    description: 'Near-Surface Specific Humidity'
   - name: Amon.pr
     short_name: pr
+    cmip7_name: atmos.pr.tavg-u-hxy-u.mon.glb
+    description: 'Precipitation'
   - name: Amon.prc
     short_name: prc
+    cmip7_name: atmos.prc.tavg-u-hxy-u.mon.glb
+    description: 'Convective Precipitation'
   - name: Amon.prsn
     short_name: prsn
+    cmip7_name: atmos.prsn.tavg-u-hxy-u.mon.glb
+    description: 'Snowfall Flux'
   - name: Amon.prw
     short_name: prw
+    cmip7_name: atmos.prw.tavg-u-hxy-u.mon.glb
+    description: 'Water Vapor Path'
   - name: Amon.ps
     short_name: ps
+    cmip7_name: atmos.ps.tavg-u-hxy-u.mon.glb
+    description: 'Surface Air Pressure'
   - name: Amon.psl
     short_name: psl
+    cmip7_name: atmos.psl.tavg-u-hxy-u.mon.glb
+    description: 'Sea Level Pressure'
   - name: Amon.rlds
     short_name: rlds
+    cmip7_name: atmos.rlds.tavg-u-hxy-u.mon.glb
+    description: 'Surface Downwelling Longwave Radiation'
   - name: Amon.rldscs
     short_name: rldscs
+    cmip7_name: atmos.rldscs.tavg-u-hxy-u.mon.glb
+    description: 'Surface Downwelling Clear-Sky Longwave Radiation'
   - name: Amon.rlus
     short_name: rlus
+    cmip7_name: atmos.rlus.tavg-u-hxy-u.mon.glb
+    description: 'Surface Upwelling Longwave Radiation'
   - name: Amon.rluscs
     short_name: rluscs
+    cmip7_name: atmos.rluscs.tavg-u-hxy-u.mon.glb
+    description: 'Surface Upwelling Clear-Sky Longwave Radiation'
   - name: Amon.rlut
     short_name: rlut
+    cmip7_name: atmos.rlut.tavg-u-hxy-u.mon.glb
+    description: 'TOA Outgoing Longwave Radiation'
   - name: Amon.rlutcs
     short_name: rlutcs
+    cmip7_name: atmos.rlutcs.tavg-u-hxy-u.mon.glb
+    description: 'TOA Outgoing Clear-Sky Longwave Radiation'
   - name: Amon.rsds
     short_name: rsds
+    cmip7_name: atmos.rsds.tavg-u-hxy-u.mon.glb
+    description: 'Surface Downwelling Shortwave Radiation'
   - name: Amon.rsdscs
     short_name: rsdscs
+    cmip7_name: atmos.rsdscs.tavg-u-hxy-u.mon.glb
+    description: 'Surface Downwelling Clear-Sky Shortwave Radiation'
   - name: Amon.rsdt
     short_name: rsdt
+    cmip7_name: atmos.rsdt.tavg-u-hxy-u.mon.glb
+    description: 'TOA Incident Shortwave Radiation'
   - name: Amon.rsus
     short_name: rsus
+    cmip7_name: atmos.rsus.tavg-u-hxy-u.mon.glb
+    description: 'Surface Upwelling Shortwave Radiation'
   - name: Amon.rsuscs
     short_name: rsuscs
+    cmip7_name: atmos.rsuscs.tavg-u-hxy-u.mon.glb
+    description: 'Surface Upwelling Clear-Sky Shortwave Radiation'
   - name: Amon.rsut
     short_name: rsut
+    cmip7_name: atmos.rsut.tavg-u-hxy-u.mon.glb
+    description: 'TOA Outgoing Shortwave Radiation'
   - name: Amon.rsutcs
     short_name: rsutcs
+    cmip7_name: atmos.rsutcs.tavg-u-hxy-u.mon.glb
+    description: 'TOA Outgoing Clear-Sky Shortwave Radiation'
   - name: Amon.sfcWind
     short_name: sfcWind
+    cmip7_name: atmos.sfcWind.tavg-h10m-hxy-u.mon.glb
+    description: 'Near-Surface Wind Speed'
   - name: Amon.ta
     short_name: ta
+    cmip7_name: atmos.ta.tavg-p19-hxy-air.mon.glb
+    description: 'Air Temperature'
   - name: Amon.tas
     short_name: tas
+    cmip7_name: atmos.tas.tavg-h2m-hxy-u.mon.glb
+    description: 'Near-Surface Air Temperature'
   - name: Amon.tasmax
     short_name: tasmax
+    cmip7_name: atmos.tas.tmaxavg-h2m-hxy-u.mon.glb
+    description: 'Daily Maximum Near-Surface Air Temperature'
   - name: Amon.tasmin
     short_name: tasmin
+    cmip7_name: atmos.tas.tminavg-h2m-hxy-u.mon.glb
+    description: 'Daily Minimum Near-Surface Air Temperature'
   - name: Amon.tauu
     short_name: tauu
+    cmip7_name: atmos.tauu.tavg-u-hxy-u.mon.glb
+    description: 'Surface Downward Eastward Wind Stress'
   - name: Amon.tauv
     short_name: tauv
+    cmip7_name: atmos.tauv.tavg-u-hxy-u.mon.glb
+    description: 'Surface Downward Northward Wind Stress'
   - name: Amon.ts
     short_name: ts
+    cmip7_name: atmos.ts.tavg-u-hxy-u.mon.glb
+    description: 'Surface Temperature'
   - name: Amon.ua
     short_name: ua
+    cmip7_name: atmos.ua.tavg-p19-hxy-air.mon.glb
+    description: 'Eastward Wind'
   - name: Amon.uas
     short_name: uas
+    cmip7_name: atmos.uas.tavg-h10m-hxy-u.mon.glb
+    description: 'Eastward Near-Surface Wind'
   - name: Amon.va
     short_name: va
+    cmip7_name: atmos.va.tavg-p19-hxy-air.mon.glb
+    description: 'Northward Wind'
   - name: Amon.vas
     short_name: vas
+    cmip7_name: atmos.vas.tavg-h10m-hxy-u.mon.glb
+    description: 'Northward Near-Surface Wind'
   - name: Amon.wap
     short_name: wap
+    cmip7_name: atmos.wap.tavg-p19-hxy-air.mon.glb
+    description: 'Omega (=dp/dt)'
   - name: Amon.zg
     short_name: zg
+    cmip7_name: atmos.zg.tavg-p19-hxy-air.mon.glb
+    description: 'Geopotential Height'
   - name: CFday.ps
     short_name: ps
+    cmip7_name: atmos.ps.tavg-u-hxy-u.day.glb
+    description: 'Surface Air Pressure'
   - name: E1hr.pr
     short_name: pr
+    cmip7_name: atmos.pr.tavg-u-hxy-u.1hr.glb
+    description: 'Precipitation'
   - name: Efx.slthick
     short_name: slthick
+    cmip7_name: land.slthick.ti-sl-hxy-lnd.fx.glb
+    description: 'Thickness of Soil Layers'
   - name: LImon.snc
     short_name: snc
+    cmip7_name: landIce.snc.tavg-u-hxy-lnd.mon.glb
+    description: 'Snow Area Percentage'
   - name: LImon.snw
     short_name: snw
+    cmip7_name: landIce.snw.tavg-u-hxy-lnd.mon.glb
+    description: 'Surface Snow Amount'
   - name: Lmon.evspsblsoi
     short_name: evspsblsoi
+    cmip7_name: land.evspsblsoi.tavg-u-hxy-lnd.mon.glb
+    description: 'Water Evaporation from Soil'
   - name: Lmon.evspsblveg
     short_name: evspsblveg
+    cmip7_name: land.evspsblveg.tavg-u-hxy-lnd.mon.glb
+    description: 'Evaporation from Canopy'
   - name: Lmon.lai
     short_name: lai
+    cmip7_name: land.lai.tavg-u-hxy-lnd.mon.glb
+    description: 'Leaf Area Index'
   - name: Lmon.mrfso
     short_name: mrfso
+    cmip7_name: landIce.mrfso.tavg-u-hxy-lnd.mon.glb
+    description: 'Soil Frozen Water Content'
   - name: Lmon.mrro
     short_name: mrro
+    cmip7_name: land.mrro.tavg-u-hxy-lnd.mon.glb
+    description: 'Total Runoff'
   - name: Lmon.mrros
     short_name: mrros
+    cmip7_name: land.mrros.tavg-u-hxy-lnd.mon.glb
+    description: 'Surface Runoff'
   - name: Lmon.mrso
     short_name: mrso
+    cmip7_name: land.mrso.tavg-u-hxy-lnd.mon.glb
+    description: 'Total Soil Moisture Content'
   - name: Lmon.mrsos
     short_name: mrsos
+    cmip7_name: land.mrsol.tavg-d10cm-hxy-lnd.mon.glb
+    description: 'Moisture in Upper Portion of Soil Column'
   - name: Oday.sos
     short_name: sos
+    cmip7_name: ocean.sos.tavg-u-hxy-sea.day.glb
+    description: 'Sea Surface Salinity'
   - name: Oday.tos
     short_name: tos
+    cmip7_name: ocean.tos.tavg-u-hxy-sea.day.glb
+    description: 'Sea Surface Temperature'
   - name: Oday.zos
     short_name: zos
+    cmip7_name: ocean.zos.tavg-u-hxy-sea.day.glb
+    description: 'Sea Surface Height Above Geoid'
   - name: Ofx.areacello
     short_name: areacello
+    cmip7_name: ocean.areacello.ti-u-hxy-u.fx.glb
+    description: 'Grid-Cell Area for Ocean Variables'
   - name: Ofx.basin
     short_name: basin
+    cmip7_name: ocean.basin.ti-u-hxy-u.fx.glb
+    description: 'Region Selection Index'
   - name: Ofx.deptho
     short_name: deptho
+    cmip7_name: ocean.deptho.ti-u-hxy-sea.fx.glb
+    description: 'Sea Floor Depth Below Geoid'
   - name: Ofx.hfgeou
     short_name: hfgeou
+    cmip7_name: ocean.hfgeou.ti-u-hxy-sea.fx.glb
+    description: 'Upward Geothermal Heat Flux at Sea Floor'
   - name: Ofx.masscello
     short_name: masscello
+    cmip7_name: ocean.masscello.ti-ol-hxy-sea.fx.glb
+    description: 'Ocean Grid-Cell Mass per Area'
   - name: Ofx.sftof
     short_name: sftof
+    cmip7_name: ocean.sftof.ti-u-hxy-u.fx.glb
+    description: 'Sea Area Percentage'
   - name: Ofx.thkcello
     short_name: thkcello
+    cmip7_name: ocean.thkcello.ti-ol-hxy-sea.fx.glb
+    description: 'Ocean Model Cell Thickness'
   - name: Omon.bigthetao
     short_name: bigthetao
+    cmip7_name: ocean.bigthetao.tavg-ol-hxy-sea.mon.glb
+    description: 'Sea Water Conservative Temperature'
   - name: Omon.hfds
     short_name: hfds
+    cmip7_name: ocean.hfds.tavg-u-hxy-sea.mon.glb
+    description: 'Downward Heat Flux at Sea Water Surface'
   - name: Omon.masscello
     short_name: masscello
+    cmip7_name: ocean.masscello.tavg-ol-hxy-sea.mon.glb
+    description: 'Ocean Grid-Cell Mass per Area'
   - name: Omon.mlotst
     short_name: mlotst
+    cmip7_name: ocean.mlotst.tavg-u-hxy-sea.mon.glb
+    description: 'Ocean Mixed Layer Thickness Defined by Delta Sigma T of 0.03 kg m-3 referenced to the model level closest to 10 m depth'
   - name: Omon.so
     short_name: so
+    cmip7_name: ocean.so.tavg-ol-hxy-sea.mon.glb
+    description: 'Sea Water Salinity'
   - name: Omon.sos
     short_name: sos
+    cmip7_name: ocean.sos.tavg-u-hxy-sea.mon.glb
+    description: 'Sea Surface Salinity'
   - name: Omon.tauuo
     short_name: tauuo
+    cmip7_name: ocean.tauuo.tavg-u-hxy-sea.mon.glb
+    description: 'Sea Water Surface Downward X Stress'
   - name: Omon.tauvo
     short_name: tauvo
+    cmip7_name: ocean.tauvo.tavg-u-hxy-sea.mon.glb
+    description: 'Sea Water Surface Downward Y Stress'
   - name: Omon.thetao
     short_name: thetao
+    cmip7_name: ocean.thetao.tavg-ol-hxy-sea.mon.glb
+    description: 'Sea Water Potential Temperature'
   - name: Omon.thkcello
     short_name: thkcello
+    cmip7_name: ocean.thkcello.tavg-ol-hxy-sea.mon.glb
+    description: 'Ocean Model Cell Thickness'
   - name: Omon.tos
     short_name: tos
+    cmip7_name: ocean.tos.tavg-u-hxy-sea.mon.glb
+    description: 'Sea Surface Temperature'
   - name: Omon.umo
     short_name: umo
+    cmip7_name: ocean.umo.tavg-ol-hxy-sea.mon.glb
+    description: 'Ocean Mass X Transport'
   - name: Omon.uo
     short_name: uo
+    cmip7_name: ocean.uo.tavg-ol-hxy-sea.mon.glb
+    description: 'Sea Water X Velocity'
   - name: Omon.vmo
     short_name: vmo
+    cmip7_name: ocean.vmo.tavg-ol-hxy-sea.mon.glb
+    description: 'Ocean Mass Y Transport'
   - name: Omon.vo
     short_name: vo
+    cmip7_name: ocean.vo.tavg-ol-hxy-sea.mon.glb
+    description: 'Sea Water Y Velocity'
   - name: Omon.wmo
     short_name: wmo
+    cmip7_name: ocean.wmo.tavg-ol-hxy-sea.mon.glb
+    description: 'Upward Ocean Mass Transport'
   - name: Omon.wo
     short_name: wo
+    cmip7_name: ocean.wo.tavg-ol-hxy-sea.mon.glb
+    description: 'Sea Water Vertical Velocity'
   - name: Omon.zos
     short_name: zos
+    cmip7_name: ocean.zos.tavg-u-hxy-sea.mon.glb
+    description: 'Sea Surface Height Above Geoid'
   - name: Omon.zostoga
     short_name: zostoga
+    cmip7_name: ocean.zostoga.tavg-u-hm-sea.mon.glb
+    description: 'Global Average Thermosteric Sea Level Change'
   - name: SIday.siconc
     short_name: siconc
+    cmip7_name: seaIce.siconc.tavg-u-hxy-u.day.glb
+    description: 'Sea-Ice Area Percentage (Ocean Grid)'
   - name: SImon.siconc
     short_name: siconc
+    cmip7_name: seaIce.siconc.tavg-u-hxy-u.mon.glb
+    description: 'Sea-Ice Area Percentage (Ocean Grid)'
   - name: SImon.simass
     short_name: simass
+    cmip7_name: seaIce.simass.tavg-u-hxy-si.mon.glb
+    description: 'Sea-Ice Mass'
   - name: SImon.sisnthick
     short_name: sisnthick
+    cmip7_name: seaIce.snd.tavg-u-hxy-sn.mon.glb
+    description: 'Snow Thickness'
   - name: SImon.sitemptop
     short_name: sitemptop
+    cmip7_name: seaIce.ts.tavg-u-hxy-si.mon.glb
+    description: 'Surface Temperature of Sea Ice'
   - name: SImon.sithick
     short_name: sithick
+    cmip7_name: seaIce.sithick.tavg-u-hxy-si.mon.glb
+    description: 'Sea-Ice Thickness'
   - name: SImon.sitimefrac
     short_name: sitimefrac
+    cmip7_name: seaIce.sitimefrac.tavg-u-hxy-sea.mon.glb
+    description: 'Fraction of Time Steps with Sea Ice'
   - name: SImon.siu
     short_name: siu
+    cmip7_name: seaIce.siu.tavg-u-hxy-si.mon.glb
+    description: 'X-Component of Sea-Ice Velocity'
   - name: SImon.siv
     short_name: siv
+    cmip7_name: seaIce.siv.tavg-u-hxy-si.mon.glb
+    description: 'Y-Component of Sea-Ice Velocity'
   - name: day.clt
     short_name: clt
+    cmip7_name: atmos.clt.tavg-u-hxy-u.day.glb
+    description: 'Total Cloud Cover Percentage'
   - name: day.hur
     short_name: hur
+    cmip7_name: atmos.hur.tavg-p19-hxy-u.day.glb
+    description: 'Relative Humidity'
   - name: day.hurs
     short_name: hurs
+    cmip7_name: atmos.hurs.tavg-h2m-hxy-u.day.glb
+    description: 'Near-Surface Relative Humidity'
   - name: day.hus
     short_name: hus
+    cmip7_name: atmos.hus.tavg-p19-hxy-u.day.glb
+    description: 'Specific Humidity'
   - name: day.huss
     short_name: huss
+    cmip7_name: atmos.huss.tavg-h2m-hxy-u.day.glb
+    description: 'Near-Surface Specific Humidity'
   - name: day.pr
     short_name: pr
+    cmip7_name: atmos.pr.tavg-u-hxy-u.day.glb
+    description: 'Precipitation'
   - name: day.psl
     short_name: psl
+    cmip7_name: atmos.psl.tavg-u-hxy-u.day.glb
+    description: 'Sea Level Pressure'
   - name: day.rsds
     short_name: rsds
+    cmip7_name: atmos.rsds.tavg-u-hxy-u.day.glb
+    description: 'Surface Downwelling Shortwave Radiation'
   - name: day.sfcWind
     short_name: sfcWind
+    cmip7_name: atmos.sfcWind.tavg-h10m-hxy-u.day.glb
+    description: 'Near-Surface Wind Speed'
   - name: day.ta
     short_name: ta
+    cmip7_name: atmos.ta.tavg-p19-hxy-air.day.glb
+    description: 'Air Temperature'
   - name: day.tas
     short_name: tas
+    cmip7_name: atmos.tas.tavg-h2m-hxy-u.day.glb
+    description: 'Near-Surface Air Temperature'
   - name: day.tasmax
     short_name: tasmax
+    cmip7_name: atmos.tas.tmax-h2m-hxy-u.day.glb
+    description: 'Daily Maximum Near-Surface Air Temperature'
   - name: day.tasmin
     short_name: tasmin
+    cmip7_name: atmos.tas.tmin-h2m-hxy-u.day.glb
+    description: 'Daily Minimum Near-Surface Air Temperature'
   - name: day.ua
     short_name: ua
+    cmip7_name: atmos.ua.tavg-p19-hxy-air.day.glb
+    description: 'Eastward Wind'
   - name: day.uas
     short_name: uas
+    cmip7_name: atmos.uas.tavg-h10m-hxy-u.day.glb
+    description: 'Eastward Near-Surface Wind'
   - name: day.va
     short_name: va
+    cmip7_name: atmos.va.tavg-p19-hxy-air.day.glb
+    description: 'Northward Wind'
   - name: day.vas
     short_name: vas
+    cmip7_name: atmos.vas.tavg-h10m-hxy-u.day.glb
+    description: 'Northward Near-Surface Wind'
   - name: day.wap
     short_name: wap
+    cmip7_name: atmos.wap.tavg-p19-hxy-u.day.glb
+    description: 'Omega (=dp/dt)'
   - name: day.zg
     short_name: zg
+    cmip7_name: atmos.zg.tavg-p19-hxy-air.day.glb
+    description: 'Geopotential Height'
   - name: fx.areacella
     short_name: areacella
+    cmip7_name: atmos.areacella.ti-u-hxy-u.fx.glb
+    description: 'Grid-Cell Area for Atmospheric Grid Variables'
   - name: fx.mrsofc
     short_name: mrsofc
+    cmip7_name: land.mrsofc.ti-u-hxy-lnd.fx.glb
+    description: 'Capacity of Soil to Store Water (Field Capacity)'
   - name: fx.orog
     short_name: orog
+    cmip7_name: land.orog.ti-u-hxy-u.fx.glb
+    description: 'Surface Altitude'
   - name: fx.rootd
     short_name: rootd
+    cmip7_name: land.rootd.ti-u-hxy-lnd.fx.glb
+    description: 'Maximum Root Depth'
   - name: fx.sftgif
     short_name: sftgif
+    cmip7_name: land.sftgif.ti-u-hxy-u.fx.glb
+    description: 'Land Ice Area Percentage'
   - name: fx.sftlf
     short_name: sftlf
+    cmip7_name: atmos.sftlf.ti-u-hxy-u.fx.glb
+    description: 'Percentage of the Grid Cell Occupied by Land (Including Lakes)'

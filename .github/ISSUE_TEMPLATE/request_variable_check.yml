@@ -1,8 +1,9 @@
 name: "Request a check for a variable / experiment"
 description: >
-  Ask for an existing check to be applied to a specific variable, or for a
-  specific experiment. Use this when the check already exists in the catalogue
-  but is not yet wired to the variable/experiment you care about.
+  Ask for an existing additional or REF check to be applied to a specific
+  variable, or for a specific experiment. Use this when the check already
+  exists in the catalogue but is not yet wired to the variable/experiment you
+  care about.
 title: "[requirement] <variable> — <check_id>"
 labels:
   - "type/requirement"
@@ -13,10 +14,17 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Request a variable / experiment requirement
-        This form records that a specific check should be **required** (or
-        **optional**) for a particular variable, optionally scoped to certain
-        experiments.
+        ## Request a variable / experiment assignment
+        This form records that a specific check should be assigned to a
+        particular variable, optionally scoped to certain experiments.
+
+        The systematic WCRP status is tracked separately in
+        `requirements/wcrp.yaml`.
+
+        Important distinctions:
+        - this form proposes a `requirement_class`
+        - runtime result `status` values such as `pass`, `fail`, and `not_done`
+          are tracked separately and should not be used here
 
   - type: input
     id: check_id
@@ -24,7 +32,7 @@ body:
       label: "Check id *"
       description: >
         The dot-separated check id from the catalogue, e.g.
-        `data_integrity.valid_range`. Check `checks/*.yaml` for the full list.
+        `global_stats.min_max_range`. Check `checks/*.yaml` for the full list.
       placeholder: "category.check_name"
     validations:
       required: true
@@ -54,13 +62,21 @@ body:
       required: true
 
   - type: dropdown
-    id: status
+    id: requirement_class
     attributes:
-      label: "Proposed status *"
-      description: Should the check be blocking (required) or advisory (optional)?
+      label: "Proposed requirement class *"
+      description: >
+        How should this assignment apply?
+        `required` = blocking, `optional` = advisory,
+        `proposed` = under discussion,
+        `not-applicable` = explicitly excluded,
+        `wont-fix` = acknowledged but not planned.
       options:
         - required
         - optional
+        - proposed
+        - not-applicable
+        - wont-fix
     validations:
       required: true
 
@@ -70,7 +86,8 @@ body:
       label: "Rationale *"
       description: >
         Why should this check be run for this variable/experiment combination?
-        Cite model failures, data quality incidents, or domain knowledge.
+        Cite model failures, data quality incidents, domain knowledge, or REF
+        evaluation needs.
     validations:
       required: true
 
@@ -80,7 +97,9 @@ body:
       label: "Notes for the YAML entry"
       description: >
         Any thresholds, references, or caveats that should appear in the
-        requirements YAML notes field.
+        layered requirements YAML notes field.
+        If you already know the expected runtime outcome defaults, mention them
+        here, but do not encode them as `requirement_class`.
 
   - type: dropdown
     id: realm
@@ -102,4 +121,6 @@ body:
         - label: "The check id exists in checks/*.yaml (or I have opened a propose_check issue)"
           required: true
         - label: "I have verified this requirement is not already in requirements/"
+          required: true
+        - label: "I understand that `requirement_class` is not the same as runtime `status`"
           required: true

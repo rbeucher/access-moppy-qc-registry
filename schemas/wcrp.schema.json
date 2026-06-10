@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/rbeucher/access-moppy-qc-registry/schemas/wcrp.schema.json",
+  "title": "WCRP QC Status",
+  "description": "Systematic cc-plugin-wcrp status for a variable",
+  "type": "object",
+  "required": ["variable", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "variable": {
+      "oneOf": [
+        {"type": "string"},
+        {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      ],
+      "description": "CMOR variable name(s), or * for all variables"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pass", "fail", "not_done"],
+      "description": "Outcome of the systematic cc-plugin-wcrp check"
+    },
+    "issue": {
+      "type": "integer",
+      "description": "GitHub Issue number tracking this WCRP status entry"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

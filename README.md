@@ -4,6 +4,16 @@ Structured catalogue of QC checks and variable-level requirements for the
 [ACCESS-MOPPy](https://github.com/ACCESS-NRI/ACCESS-MOPPy) CMORisation
 pipeline, with a live dashboard hosted on GitHub Pages.
 
+The registry now tracks three distinct layers:
+
+1. A single systematic `cc-plugin-wcrp` outcome per variable: `pass`, `fail`, or `not_done`.
+2. Proposal-based additional checks, assignable globally or per variable/experiment.
+3. Optional REF (Rapid Evaluation Framework) checks for variables that support them.
+
+For layered assignments, the field is `requirement_class` rather than `status`,
+because it describes applicability and priority, not the runtime result of a
+test.
+
 ## Dashboard
 
 **→ [Open dashboard](https://rbeucher.github.io/access-moppy-qc-registry/)**
@@ -12,9 +22,9 @@ Four views are available:
 
 | View | Description |
 |---|---|
-| **Experiment Matrix** | All variables × check categories for a selected experiment |
-| **Variable Detail** | Every check across all experiments for one variable |
-| **Check Coverage** | All variables × experiments for one check |
+| **Experiment Matrix** | All variables × WCRP, additional categories, and REF for a selected experiment |
+| **Variable Detail** | WCRP plus every layered additional/REF check across experiments for one variable |
+| **Layered Check Coverage** | All variables × experiments for one additional or REF check |
 | **Open Proposals** | Live feed of `status/proposed` GitHub Issues |
 
 ## Repository structure
@@ -22,9 +32,10 @@ Four views are available:
 ```
 checks/                    # Check catalogue (one YAML file per category)
 requirements/
+    wcrp.yaml              # Systematic cc-plugin-wcrp status per variable
     global.yaml            # Checks required for ALL variables/experiments
-    variables/<var>.yaml   # Per-variable requirements
-    experiments/<exp>.yaml # Experiment-level overrides
+    variables/<var>.yaml   # Per-variable layered assignments
+    experiments/<exp>.yaml # Experiment-level layered overrides
 schemas/                   # JSON Schemas for YAML validation
 scripts/
     compile_registry.py    # Builds dashboard/registry.json from YAML sources
@@ -39,15 +50,27 @@ dashboard/                 # Static GitHub Pages site
     workflows/             # CI: validate on PR, build+deploy on merge to main
 ```
 
-## Adding a new check
+## WCRP status
+
+`requirements/wcrp.yaml` records the single systematic `cc-plugin-wcrp`
+outcome for each variable. If a variable is not listed explicitly, it inherits
+the wildcard default, which is normally `not_done`.
+
+## Adding a new additional or REF check
 
 1. Open an Issue using the **"Propose a new QC check"** template.
-2. A maintainer will review and add an entry to `checks/<category>.yaml`.
+2. A maintainer will review and add an entry to `checks/*.yaml`.
 3. The Python implementation goes in
-   `access_moppy.qc.checks.<category>` in the main ACCESS-MOPPy repository.
+   `access_moppy.qc.checks.*` in the main ACCESS-MOPPy repository.
 4. Once merged, CI rebuilds the dashboard automatically.
 
-## Requesting a check for a variable / experiment
+Each check definition now declares:
+
+- `kind`: `additional` or `ref`
+- `categories`: one or more of `spatial`, `temporal`, `data`, `ref`
+- `scope`: `global`, `per_variable`, `per_experiment`, or a combination of `per_variable` and `per_experiment`
+
+## Requesting an additional or REF check for a variable / experiment
 
 1. Open an Issue using the **"Request a check for a variable / experiment"**
    template.
@@ -60,16 +83,27 @@ dashboard/                 # Static GitHub Pages site
 |---|---|
 | `type/` | `type/new-check`, `type/requirement`, `type/bug-check` |
 | `status/` | `status/proposed`, `status/accepted`, `status/implemented`, `status/rejected`, `status/deferred` |
-| `category/` | `category/temporal`, `category/metadata`, `category/spatial`, `category/data_integrity`, `category/global_stats` |
+| `category/` | `category/temporal`, `category/spatial`, `category/data`, `category/ref` |
 | `realm/` | `realm/atmos`, `realm/ocean`, `realm/seaIce`, `realm/land` |
 | `experiment/` | `experiment/historical`, `experiment/piControl`, `experiment/ssp585` |
 | `priority/` | `priority/critical`, `priority/high`, `priority/low` |
 
 ## Local development
 
+With Pixi:
+
+```bash
+pixi run validate
+pixi run compile-registry
+pixi run serve-dashboard
+```
+
+Pixi uses [pixi.toml](/home/romain/PROJECTS/access-moppy-qc-registry/pixi.toml:1) to provision a local Python environment with the registry dependencies.
+
 ```bash
 # Validate all YAML files
 python scripts/validate_schema.py checks/ schemas/check.schema.json
+python scripts/validate_schema.py requirements/wcrp.yaml schemas/wcrp.schema.json
 python scripts/validate_schema.py requirements/ schemas/requirement.schema.json
 python scripts/validate_schema.py --cross-reference
 
