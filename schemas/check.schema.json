@@ -26,7 +26,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "enum": ["spatial", "temporal", "data", "ref"]
+        "enum": ["spatial", "temporal", "data"]
       },
       "description": "High-level groupings shown in the dashboard; a check may belong to multiple categories"
     },

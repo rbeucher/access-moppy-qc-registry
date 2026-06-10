@@ -228,6 +228,15 @@ function openVariableDetail(variable, filter = "") {
   renderVariableDetail(document.getElementById("app"), variable, filter);
 }
 
+function formatVariableOption(variable) {
+  const realm = registry.realms?.[variable];
+  const cmip7 = registry.cmip7_names?.[variable];
+  if (realm && cmip7) return `${variable} [${realm}] - ${cmip7}`;
+  if (realm) return `${variable} [${realm}]`;
+  if (cmip7) return `${variable} - ${cmip7}`;
+  return variable;
+}
+
 function renderMatrix(container) {
   const allExperiments = registry.experiments.length ? registry.experiments : ["(all)"];
   const allVariables = registry.variables.length ? registry.variables : [];
@@ -319,7 +328,10 @@ function buildMatrixTable(variables, experiment) {
   for (const variable of variables) {
     const row = tbody.insertRow();
     const varCell = document.createElement("th");
-    varCell.innerHTML = `<a href="#" class="var-link" data-var="${variable}">${variable}</a>`;
+    const cmip7 = registry.cmip7_names?.[variable];
+    varCell.innerHTML =
+      `<a href="#" class="var-link" data-var="${variable}">${variable}</a>` +
+      (cmip7 ? `<div class="cell-subtext">${escHtml(cmip7)}</div>` : "");
     row.appendChild(varCell);
 
     const realmCell = row.insertCell();
@@ -355,8 +367,8 @@ function buildMatrixTable(variables, experiment) {
 
 function makeLegend() {
   const items = [
-    { cls: "cell-pass", label: "WCRP pass" },
-    { cls: "cell-fail", label: "WCRP fail" },
+    { cls: "cell-pass", label: "Pass" },
+    { cls: "cell-fail", label: "Fail" },
     { cls: "cell-not_done", label: "Not done" },
     { cls: "cell-na", label: "Not applicable / not assigned" },
   ];
@@ -397,7 +409,7 @@ function renderVariableDetail(container, preselected, preselectedFilter = "") {
     <label for="var-select">Variable</label>
     <select id="var-select">
       <option value="">- select -</option>
-      ${allVariables.map((variable) => `<option value="${variable}">${variable}</option>`).join("")}
+      ${allVariables.map((variable) => `<option value="${variable}">${escHtml(formatVariableOption(variable))}</option>`).join("")}
     </select>
     <label for="exp-select">Experiment</label>
     <select id="exp-select">
@@ -431,6 +443,13 @@ function renderVariableDetail(container, preselected, preselectedFilter = "") {
       (registry.realms[variable] ? ` (realm: ${registry.realms[variable]})` : "") +
       (contextParts.length ? ` · context: ${contextParts.join(" / ")}` : "");
     content.appendChild(subtitle);
+
+    if (registry.cmip7_names?.[variable]) {
+      const cmip7Meta = document.createElement("div");
+      cmip7Meta.className = "view-subtitle";
+      cmip7Meta.innerHTML = `CMIP7 name: <code>${escHtml(registry.cmip7_names[variable])}</code>`;
+      content.appendChild(cmip7Meta);
+    }
 
     const actions = document.createElement("div");
     actions.className = "detail-actions";
@@ -640,7 +659,9 @@ function renderCheckCoverage(container) {
       const row = tbody.insertRow();
       const variableCell = document.createElement("th");
       variableCell.style.fontFamily = "var(--mono)";
-      variableCell.textContent = variable;
+      variableCell.innerHTML =
+        `${escHtml(variable)}` +
+        (registry.cmip7_names?.[variable] ? `<div class="cell-subtext">${escHtml(registry.cmip7_names[variable])}</div>` : "");
       row.appendChild(variableCell);
 
       allExperiments.forEach((experiment) => {

@@ -21,7 +21,8 @@ Output format
   "requirements": [ <requirement objects with wildcards left as-is> ],
   "variables": [ <sorted list of all explicit variable names> ],
   "experiments": [ <sorted list of all explicit experiment names> ],
-  "realms": { "<variable>": "<realm>" }
+  "realms": { "<variable>": "<realm>" },
+  "cmip7_names": { "<variable>": "<cmip7_name>" }
 }
 """
 from __future__ import annotations
@@ -60,11 +61,19 @@ def _load_yaml_dir(directory: Path) -> list[dict]:
 def load_inventory() -> dict[str, object]:
     """Load optional synced variable/experiment inventory."""
     if not INVENTORY_FILE.exists():
-        return {"variables": [], "experiments": [], "aliases": {}}
+        return {
+            "variables": [],
+            "experiments": [],
+            "aliases": {},
+            "realms": {},
+            "cmip7_names": {},
+        }
     with INVENTORY_FILE.open() as fh:
         data = yaml.safe_load(fh) or {}
     variables: list[str] = []
     aliases: dict[str, str] = {}
+    realms: dict[str, str] = {}
+    cmip7_names: dict[str, str] = {}
     for entry in data.get("variables", []) or []:
         if isinstance(entry, str):
             variables.append(entry)
@@ -75,10 +84,20 @@ def load_inventory() -> dict[str, object]:
         variables.append(name)
         if entry.get("short_name"):
             aliases[name] = entry["short_name"]
+        cmip7_name = entry.get("cmip7_name")
+        if cmip7_name:
+            cmip7_names[name] = cmip7_name
+        realm = entry.get("realm")
+        if realm:
+            realms[name] = str(realm)
+        elif cmip7_name and "." in cmip7_name:
+            realms[name] = cmip7_name.split(".", 1)[0]
     return {
         "variables": sorted(set(variables)),
         "experiments": sorted(set(data.get("experiments", []) or [])),
         "aliases": aliases,
+        "realms": realms,
+        "cmip7_names": cmip7_names,
     }
 
 
@@ -193,11 +212,14 @@ def compile_registry(output: Path) -> None:
     inventory = load_inventory()
     variables = inventory["variables"] or collect_variables(requirements)
     experiments = inventory["experiments"] or collect_experiments(requirements)
-    realm_map = build_realm_map(ROOT / "requirements" / "variables")
+    realm_map = inventory["realms"] or build_realm_map(ROOT / "requirements" / "variables")
+    cmip7_names = inventory["cmip7_names"]
     aliases = inventory["aliases"]
     for variable, alias in aliases.items():
         if alias in realm_map and variable not in realm_map:
             realm_map[variable] = realm_map[alias]
+        if alias in cmip7_names and variable not in cmip7_names:
+            cmip7_names[variable] = cmip7_names[alias]
 
     registry = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -207,6 +229,7 @@ def compile_registry(output: Path) -> None:
         "variables": variables,
         "experiments": experiments,
         "realms": realm_map,
+        "cmip7_names": cmip7_names,
         "variable_aliases": aliases,
     }
 

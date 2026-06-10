@@ -57,12 +57,12 @@ body:
       label: "Categories *"
       description: >
         Which dashboard categories should this check appear under?
-        Use `ref` whenever the layer is `ref`.
+        Categories describe the check content; the separate `Layer` field already
+        tells us whether it is an additional or REF check.
       options:
         - label: "spatial"
         - label: "temporal"
         - label: "data"
-        - label: "ref"
 
   - type: checkboxes
     id: scope

@@ -67,7 +67,7 @@ the wildcard default, which is normally `not_done`.
 Each check definition now declares:
 
 - `kind`: `additional` or `ref`
-- `categories`: one or more of `spatial`, `temporal`, `data`, `ref`
+- `categories`: one or more of `spatial`, `temporal`, `data`
 - `scope`: `global`, `per_variable`, `per_experiment`, or a combination of `per_variable` and `per_experiment`
 
 ## Requesting an additional or REF check for a variable / experiment
@@ -83,7 +83,7 @@ Each check definition now declares:
 |---|---|
 | `type/` | `type/new-check`, `type/requirement`, `type/bug-check` |
 | `status/` | `status/proposed`, `status/accepted`, `status/implemented`, `status/rejected`, `status/deferred` |
-| `category/` | `category/temporal`, `category/spatial`, `category/data`, `category/ref` |
+| `category/` | `category/temporal`, `category/spatial`, `category/data` |
 | `realm/` | `realm/atmos`, `realm/ocean`, `realm/seaIce`, `realm/land` |
 | `experiment/` | `experiment/historical`, `experiment/piControl`, `experiment/ssp585` |
 | `priority/` | `priority/critical`, `priority/high`, `priority/low` |
