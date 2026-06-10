@@ -7,6 +7,12 @@
 // ── Configuration ──────────────────────────────────────────────────────────
 const GITHUB_REPO = "rbeucher/access-moppy-qc-registry";
 const REGISTRY_URL = "registry.json";
+const LINK_CONTEXT = {
+  variable: "",
+  experiment: "",
+  model: "",
+  member: "",
+};
 
 // ── Status display helpers ──────────────────────────────────────────────────
 const STATUS_LABELS = {
@@ -35,6 +41,12 @@ let currentView = "matrix";
 
 // ── Bootstrap ───────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
+  const params = new URLSearchParams(window.location.search);
+  LINK_CONTEXT.variable = params.get("variable") || params.get("short_name") || "";
+  LINK_CONTEXT.experiment = params.get("experiment") || "";
+  LINK_CONTEXT.model = params.get("model") || "";
+  LINK_CONTEXT.member = params.get("member") || "";
+
   // Wire nav buttons
   document.querySelectorAll(".nav-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -61,6 +73,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     `${registry.checks.length} checks · ${registry.requirements.length} requirements · ` +
     `${registry.variables.length} variables · ${registry.experiments.length} experiments`;
 
+  if (LINK_CONTEXT.variable) {
+    document.querySelectorAll(".nav-btn").forEach((b) => b.classList.remove("active"));
+    document.querySelector('[data-view="variable"]').classList.add("active");
+    currentView = "variable";
+  }
+
   renderView();
 });
 
@@ -69,12 +87,19 @@ function renderView() {
   const app = document.getElementById("app");
   app.innerHTML = "";
   if (currentView === "matrix")    renderMatrix(app);
-  if (currentView === "variable")  renderVariableDetail(app);
+  if (currentView === "variable")  renderVariableDetail(app, LINK_CONTEXT.variable);
   if (currentView === "check")     renderCheckCoverage(app);
   if (currentView === "proposals") renderProposals(app);
 }
 
 // ── Requirement lookup helpers ───────────────────────────────────────────────
+function variableCandidates(variable) {
+  const candidates = [variable];
+  const alias = registry?.variable_aliases?.[variable];
+  if (alias && !candidates.includes(alias)) candidates.push(alias);
+  return candidates;
+}
+
 /**
  * Returns the "effective" status for a (check, variable, experiment) triple.
  * Priority: explicit variable+experiment > explicit variable+* > *+experiment > *+*
@@ -83,10 +108,11 @@ function renderView() {
 function effectiveStatus(checkId, variable, experiment) {
   const reqs = registry.requirements.filter((r) => r.check === checkId);
   if (!reqs.length) return "missing";
+  const varNames = variableCandidates(variable);
 
   function matches(req) {
-    const vMatch = req.variable === variable || req.variable === "*" ||
-                   (Array.isArray(req.variable) && (req.variable.includes(variable) || req.variable.includes("*")));
+    const vMatch = varNames.includes(req.variable) || req.variable === "*" ||
+                   (Array.isArray(req.variable) && (req.variable.includes("*") || varNames.some((name) => req.variable.includes(name))));
     const eMatch = req.experiment === experiment || req.experiment === "*" ||
                    (Array.isArray(req.experiment) && (req.experiment.includes(experiment) || req.experiment.includes("*")));
     return vMatch && eMatch;
@@ -277,6 +303,10 @@ function renderVariableDetail(container, preselected) {
   container.innerHTML = "";
 
   const allVariables = registry.variables;
+  const allExperiments = registry.experiments.length ? registry.experiments : ["*"];
+  let experimentFilter = LINK_CONTEXT.experiment && allExperiments.includes(LINK_CONTEXT.experiment)
+    ? LINK_CONTEXT.experiment
+    : "*";
 
   const title = document.createElement("div");
   title.className = "view-title";
@@ -290,6 +320,11 @@ function renderVariableDetail(container, preselected) {
       <option value="">— select —</option>
       ${allVariables.map((v) => `<option value="${v}">${v}</option>`).join("")}
     </select>
+    <label for="exp-select">Experiment</label>
+    <select id="exp-select">
+      <option value="*">All experiments</option>
+      ${allExperiments.map((e) => `<option value="${e}"${e === experimentFilter ? " selected" : ""}>${e}</option>`).join("")}
+    </select>
   `;
 
   container.appendChild(title);
@@ -302,14 +337,16 @@ function renderVariableDetail(container, preselected) {
     tableWrap.innerHTML = "";
     if (!variable) return;
 
-    const allExperiments = registry.experiments.length ? registry.experiments : ["*"];
+    const detailExperiments = experimentFilter === "*" ? allExperiments : [experimentFilter];
     const allChecks = registry.checks;
 
     const subtitle = document.createElement("div");
     subtitle.className = "view-subtitle";
+    const contextParts = [LINK_CONTEXT.model, experimentFilter !== "*" ? experimentFilter : "", LINK_CONTEXT.member].filter(Boolean);
     subtitle.textContent =
-      `${allChecks.length} checks × ${allExperiments.length} experiments for ${variable}` +
-      (registry.realms[variable] ? ` (realm: ${registry.realms[variable]})` : "");
+      `${allChecks.length} checks × ${detailExperiments.length} experiment${detailExperiments.length === 1 ? "" : "s"} for ${variable}` +
+      (registry.realms[variable] ? ` (realm: ${registry.realms[variable]})` : "") +
+      (contextParts.length ? ` · context: ${contextParts.join(" / ")}` : "");
     tableWrap.appendChild(subtitle);
 
     const table = document.createElement("table");
@@ -318,7 +355,7 @@ function renderVariableDetail(container, preselected) {
     // Header
     const thead = table.createTHead();
     const headerRow = thead.insertRow();
-    ["Check", "Category", "Scope", ...allExperiments].forEach((h) => {
+    ["Check", "Category", "Scope", ...detailExperiments].forEach((h) => {
       headerRow.insertCell().outerHTML = `<th>${h}</th>`;
     });
 
@@ -336,7 +373,7 @@ function renderVariableDetail(container, preselected) {
       const scopeCell = row.insertCell();
       scopeCell.innerHTML = `<span class="badge badge-${check.scope === 'global' ? 'global' : 'proposed'}">${check.scope}</span>`;
 
-      for (const exp of allExperiments) {
+      for (const exp of detailExperiments) {
         const status = effectiveStatus(check.id, variable, exp);
         const cell = row.insertCell();
         cell.className = `cell-${status}`;
@@ -354,6 +391,10 @@ function renderVariableDetail(container, preselected) {
     drawDetail(preselected);
   }
   sel.addEventListener("change", (e) => drawDetail(e.target.value));
+  controls.querySelector("#exp-select").addEventListener("change", (e) => {
+    experimentFilter = e.target.value;
+    drawDetail(sel.value);
+  });
 }
 
 // ── View: Check Coverage ─────────────────────────────────────────────────────

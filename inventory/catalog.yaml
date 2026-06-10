@@ -1,0 +1,286 @@
+# Synced inventory from access-moppy-progress
+# Used to keep dashboard experiment and variable selectors aligned.
+experiments:
+  - 1pctCO2
+  - 1pctCO2-bgc
+  - 1pctCO2-rad
+  - abrupt-4xCO2
+  - amip
+  - esm-historical
+  - esm-piControl
+  - high-scenario-concentration-driven
+  - high-scenario-emission-driven
+  - low-overshoot-scenario-emission-driven
+  - low-scenario-concentration-driven
+  - low-scenario-emission-driven
+  - medium-scenario-concentration-driven
+  - medium-scenario-emission-driven
+  - overshoot-scenario-emission-driven
+  - piClim-4xCO2
+  - piClim-anthro
+  - piClim-control
+  - piControl
+  - very-low-scenario-emission-driven
+variables:
+  - name: 3hr.huss
+    short_name: huss
+  - name: 3hr.pr
+    short_name: pr
+  - name: 3hr.tas
+    short_name: tas
+  - name: 3hrPt.uas
+    short_name: uas
+  - name: 3hrPt.vas
+    short_name: vas
+  - name: 6hrPlev.hurs
+    short_name: hurs
+  - name: 6hrPlevPt.ta
+    short_name: ta
+  - name: 6hrPlevPt.ua
+    short_name: ua
+  - name: 6hrPlevPt.va
+    short_name: va
+  - name: Amon.cl
+    short_name: cl
+  - name: Amon.cli
+    short_name: cli
+  - name: Amon.clivi
+    short_name: clivi
+  - name: Amon.clt
+    short_name: clt
+  - name: Amon.clw
+    short_name: clw
+  - name: Amon.clwvi
+    short_name: clwvi
+  - name: Amon.evspsbl
+    short_name: evspsbl
+  - name: Amon.hfls
+    short_name: hfls
+  - name: Amon.hfss
+    short_name: hfss
+  - name: Amon.hur
+    short_name: hur
+  - name: Amon.hurs
+    short_name: hurs
+  - name: Amon.hus
+    short_name: hus
+  - name: Amon.huss
+    short_name: huss
+  - name: Amon.pr
+    short_name: pr
+  - name: Amon.prc
+    short_name: prc
+  - name: Amon.prsn
+    short_name: prsn
+  - name: Amon.prw
+    short_name: prw
+  - name: Amon.ps
+    short_name: ps
+  - name: Amon.psl
+    short_name: psl
+  - name: Amon.rlds
+    short_name: rlds
+  - name: Amon.rldscs
+    short_name: rldscs
+  - name: Amon.rlus
+    short_name: rlus
+  - name: Amon.rluscs
+    short_name: rluscs
+  - name: Amon.rlut
+    short_name: rlut
+  - name: Amon.rlutcs
+    short_name: rlutcs
+  - name: Amon.rsds
+    short_name: rsds
+  - name: Amon.rsdscs
+    short_name: rsdscs
+  - name: Amon.rsdt
+    short_name: rsdt
+  - name: Amon.rsus
+    short_name: rsus
+  - name: Amon.rsuscs
+    short_name: rsuscs
+  - name: Amon.rsut
+    short_name: rsut
+  - name: Amon.rsutcs
+    short_name: rsutcs
+  - name: Amon.sfcWind
+    short_name: sfcWind
+  - name: Amon.ta
+    short_name: ta
+  - name: Amon.tas
+    short_name: tas
+  - name: Amon.tasmax
+    short_name: tasmax
+  - name: Amon.tasmin
+    short_name: tasmin
+  - name: Amon.tauu
+    short_name: tauu
+  - name: Amon.tauv
+    short_name: tauv
+  - name: Amon.ts
+    short_name: ts
+  - name: Amon.ua
+    short_name: ua
+  - name: Amon.uas
+    short_name: uas
+  - name: Amon.va
+    short_name: va
+  - name: Amon.vas
+    short_name: vas
+  - name: Amon.wap
+    short_name: wap
+  - name: Amon.zg
+    short_name: zg
+  - name: CFday.ps
+    short_name: ps
+  - name: E1hr.pr
+    short_name: pr
+  - name: Efx.slthick
+    short_name: slthick
+  - name: LImon.snc
+    short_name: snc
+  - name: LImon.snw
+    short_name: snw
+  - name: Lmon.evspsblsoi
+    short_name: evspsblsoi
+  - name: Lmon.evspsblveg
+    short_name: evspsblveg
+  - name: Lmon.lai
+    short_name: lai
+  - name: Lmon.mrfso
+    short_name: mrfso
+  - name: Lmon.mrro
+    short_name: mrro
+  - name: Lmon.mrros
+    short_name: mrros
+  - name: Lmon.mrso
+    short_name: mrso
+  - name: Lmon.mrsos
+    short_name: mrsos
+  - name: Oday.sos
+    short_name: sos
+  - name: Oday.tos
+    short_name: tos
+  - name: Oday.zos
+    short_name: zos
+  - name: Ofx.areacello
+    short_name: areacello
+  - name: Ofx.basin
+    short_name: basin
+  - name: Ofx.deptho
+    short_name: deptho
+  - name: Ofx.hfgeou
+    short_name: hfgeou
+  - name: Ofx.masscello
+    short_name: masscello
+  - name: Ofx.sftof
+    short_name: sftof
+  - name: Ofx.thkcello
+    short_name: thkcello
+  - name: Omon.bigthetao
+    short_name: bigthetao
+  - name: Omon.hfds
+    short_name: hfds
+  - name: Omon.masscello
+    short_name: masscello
+  - name: Omon.mlotst
+    short_name: mlotst
+  - name: Omon.so
+    short_name: so
+  - name: Omon.sos
+    short_name: sos
+  - name: Omon.tauuo
+    short_name: tauuo
+  - name: Omon.tauvo
+    short_name: tauvo
+  - name: Omon.thetao
+    short_name: thetao
+  - name: Omon.thkcello
+    short_name: thkcello
+  - name: Omon.tos
+    short_name: tos
+  - name: Omon.umo
+    short_name: umo
+  - name: Omon.uo
+    short_name: uo
+  - name: Omon.vmo
+    short_name: vmo
+  - name: Omon.vo
+    short_name: vo
+  - name: Omon.wmo
+    short_name: wmo
+  - name: Omon.wo
+    short_name: wo
+  - name: Omon.zos
+    short_name: zos
+  - name: Omon.zostoga
+    short_name: zostoga
+  - name: SIday.siconc
+    short_name: siconc
+  - name: SImon.siconc
+    short_name: siconc
+  - name: SImon.simass
+    short_name: simass
+  - name: SImon.sisnthick
+    short_name: sisnthick
+  - name: SImon.sitemptop
+    short_name: sitemptop
+  - name: SImon.sithick
+    short_name: sithick
+  - name: SImon.sitimefrac
+    short_name: sitimefrac
+  - name: SImon.siu
+    short_name: siu
+  - name: SImon.siv
+    short_name: siv
+  - name: day.clt
+    short_name: clt
+  - name: day.hur
+    short_name: hur
+  - name: day.hurs
+    short_name: hurs
+  - name: day.hus
+    short_name: hus
+  - name: day.huss
+    short_name: huss
+  - name: day.pr
+    short_name: pr
+  - name: day.psl
+    short_name: psl
+  - name: day.rsds
+    short_name: rsds
+  - name: day.sfcWind
+    short_name: sfcWind
+  - name: day.ta
+    short_name: ta
+  - name: day.tas
+    short_name: tas
+  - name: day.tasmax
+    short_name: tasmax
+  - name: day.tasmin
+    short_name: tasmin
+  - name: day.ua
+    short_name: ua
+  - name: day.uas
+    short_name: uas
+  - name: day.va
+    short_name: va
+  - name: day.vas
+    short_name: vas
+  - name: day.wap
+    short_name: wap
+  - name: day.zg
+    short_name: zg
+  - name: fx.areacella
+    short_name: areacella
+  - name: fx.mrsofc
+    short_name: mrsofc
+  - name: fx.orog
+    short_name: orog
+  - name: fx.rootd
+    short_name: rootd
+  - name: fx.sftgif
+    short_name: sftgif
+  - name: fx.sftlf
+    short_name: sftlf

@@ -34,6 +34,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).parent.parent
+INVENTORY_FILE = ROOT / "inventory" / "catalog.yaml"
 
 
 def _load_yaml_file(path: Path) -> list[dict]:
@@ -53,6 +54,31 @@ def _load_yaml_dir(directory: Path) -> list[dict]:
     for yaml_file in sorted(directory.glob("*.yaml")):
         items.extend(_load_yaml_file(yaml_file))
     return items
+
+
+def load_inventory() -> dict[str, object]:
+    """Load optional synced variable/experiment inventory."""
+    if not INVENTORY_FILE.exists():
+        return {"variables": [], "experiments": [], "aliases": {}}
+    with INVENTORY_FILE.open() as fh:
+        data = yaml.safe_load(fh) or {}
+    variables: list[str] = []
+    aliases: dict[str, str] = {}
+    for entry in data.get("variables", []) or []:
+        if isinstance(entry, str):
+            variables.append(entry)
+            continue
+        name = entry.get("name")
+        if not name:
+            continue
+        variables.append(name)
+        if entry.get("short_name"):
+            aliases[name] = entry["short_name"]
+    return {
+        "variables": sorted(set(variables)),
+        "experiments": sorted(set(data.get("experiments", []) or [])),
+        "aliases": aliases,
+    }
 
 
 def load_checks() -> list[dict]:
@@ -152,9 +178,14 @@ def build_realm_map(variables_dir: Path) -> dict[str, str]:
 def compile_registry(output: Path) -> None:
     checks = load_checks()
     requirements = load_requirements()
-    variables = collect_variables(requirements)
-    experiments = collect_experiments(requirements)
+    inventory = load_inventory()
+    variables = inventory["variables"] or collect_variables(requirements)
+    experiments = inventory["experiments"] or collect_experiments(requirements)
     realm_map = build_realm_map(ROOT / "requirements" / "variables")
+    aliases = inventory["aliases"]
+    for variable, alias in aliases.items():
+        if alias in realm_map and variable not in realm_map:
+            realm_map[variable] = realm_map[alias]
 
     registry = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -163,6 +194,7 @@ def compile_registry(output: Path) -> None:
         "variables": variables,
         "experiments": experiments,
         "realms": realm_map,
+        "variable_aliases": aliases,
     }
 
     output.parent.mkdir(parents=True, exist_ok=True)
